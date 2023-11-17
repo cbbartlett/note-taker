@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
-import api from './routes/index.js'
+import api from './routes/api.js'
+import getDirname from './lib/utils.js';
 
 const PORT = process.env.PORT || 3001;
 
@@ -17,11 +18,11 @@ app.use(express.static('public'));
 
 // Serve routes for static pages
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/index.html'))
+  res.sendFile(path.join(getDirname(import.meta), './public/index.html'))
 );
 
 app.get('notes', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/notes.html'))
+  res.sendFile(path.join(getDirname(import.meta), './public/notes.html'))
 );
 
 // Listens to app on our local server
